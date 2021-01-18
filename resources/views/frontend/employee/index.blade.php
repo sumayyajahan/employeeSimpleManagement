@@ -75,12 +75,31 @@ body {
         <!-- ***** Header Text Start ***** -->
         <div class="header-text">
             <div class="container">
-                <div class="row">
+                <div class="col-12">
+                 <div class="row">
                 <div id="main">
                     
-                        <button class="openbtn" onclick="openNav()">☰ Employee List</button>  
-                    
+                  <button class="openbtn" onclick="openNav()">☰ Employee List</button> 
+                  <p></p> 
+                  @auth
+
+                        <a class="btn btn-warning" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                 {{-- <button class="btn btn-warning" type="button" style="">
+
+                  </button>--}}
+                    @endauth
+                    @guest
+                        @endguest
                 </div>
+              </div>
                 </div>
             </div>
         </div>

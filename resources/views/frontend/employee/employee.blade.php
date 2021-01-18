@@ -76,11 +76,11 @@ body {
 <div class="welcome-area" id="welcome">
 
         <!-- ***** Header Text Start ***** -->
-        <div class="header-text">
+<div class="header-text">
             
-                <div class="row">
-                <div id="main">
-                <button class="openbtn" onclick="openNav()">☰ Dashboard</button> 
+ <div class="row">
+   <div id="main">
+    <button class="openbtn" onclick="openNav()">☰ Dashboard</button> 
 <div class="container" style="margin-top:80px; margin-left:50px; background-color:#FFFFFF">
   <h2>Vertical (basic) form</h2>
   <form action="/action_page.php">

@@ -20,8 +20,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource('/', 'HomeController');
 
-Route::get('/dashboard', 'EmployeeController@index')->name('dashboard');;
 
-Route::resource('employee', 'EmployeeListController');
+  
 
 
+Route::group(['middleware' => ['auth'] ], function (){
+    Route::get('/dashboard', 'EmployeeController@index')->name('dashboard');;
+   Route::resource('employee', 'EmployeeListController');
+});
+
+
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

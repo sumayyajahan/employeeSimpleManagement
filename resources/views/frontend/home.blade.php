@@ -60,43 +60,56 @@ MicroTech NA
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          
-          <h4 class="modal-title">Register</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" style="text-align:right;">Register</h4>
         </div>
         <div class="modal-body">
-        <form action="/action_page.php">
+        <form method="POST" action="{{ route('register') }}">
+          @csrf
         <div class="form-group">
-        <label for="name">Name:</label>
-        <input type="text" class="form-control" id="name" placeholder="Enter Name" name="name">
+        <label for="name">{{ __('Name') }}</label>
+        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Enter Name" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+        
+        @error('name')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+       </div>
+       <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Enter email">
+
+        @error('email')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
        </div>
        <div class="form-group">
         <label for="phone">Phone:</label>
         <input type="text" class="form-control" id="phone" placeholder="Enter Phone" name="phone">
-       </div>
-       <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
-       </div>
-       <div class="form-group">
-        <label for="designation">Designation:</label>
-        <input type="text" class="form-control" id="designation" placeholder="Enter Designation" name="designation">
        </div>
         <div class="form-group">
         <label for="email">Address:</label>
         <textarea class="form-control" rows="5"></textarea>
        </div>
        <div class="form-group">
-      <label for="pwd">Password:</label>
-      <input type="password" class="form-control" id="pwd" placeholder="Enter Password" name="pwd">
+      <label for="password">{{ __('Password') }}</label>
+      <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="Enter Password" name="password" required autocomplete="new-password">
+
+      @error('password')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+      @enderror
       </div>
       <div class="form-group">
-      <label for="pwd">Confirm Password:</label>
-      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+      <label for="pwd">{{ __('Confirm Password') }}</label>
+      <input type="password" class="form-control" id="password-confirm" placeholder="Enter password" name="password_confirmation" required autocomplete="new-password">
       </div>
-    <div class="checkbox">
-      <label><input type="checkbox" name="remember"> Remember me</label>
-    </div>
-    <button type="submit" class="btn btn-warning">Submit</button>
+    
+    <button type="submit" class="btn btn-warning">{{ __('Register') }}</button>
   </form>
         </div>
         <div class="modal-footer">
@@ -114,24 +127,45 @@ MicroTech NA
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
+        
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
           
-          <h4 class="modal-title">Login</h4>
+          <h4 class="modal-title" style="text-align:right;">Login</h4>
         </div>
         <div class="modal-body">
         
-        <form action="/action_page.php">
+        <form action="{{ route('login') }}" method="POST">
+          @csrf
+
         <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+      <label for="email">{{ __('E-Mail Address') }}</label>
+      <input type="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" id="email" placeholder="Enter email" name="email" required autocomplete="email" autofocus>
+
+      @error('email')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+      @enderror
     </div>
     <div class="form-group">
-      <label for="pwd">Password:</label>
-      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+      <label for="password">{{ __('Password') }}</label>
+      <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="Enter password" name="password" required autocomplete="current-password">
+
+      @error('password')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+     @enderror
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" name="remember"> Remember me</label>
+      <label for="remember"><input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>{{ __('Remember Me') }}</label>
     </div>
-    <button type="submit" class="btn btn-warning">Submit</button>
+    <button type="submit" class="btn btn-warning">{{ __('Login') }}</button>
+    @if (Route::has('password.request'))
+        <a class="btn btn-link" href="{{ route('password.request') }}">
+            {{ __('Forgot Your Password?') }}
+        </a>
+    @endif
   </form>
         </div>
         <div class="modal-footer">
